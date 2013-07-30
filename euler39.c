@@ -1,0 +1,70 @@
+#include<stdio.h>
+
+main()
+{
+  int p=120;
+  int a,b,c,i,j,k,total,max,ans;
+  for(p=721;p<1000;p++)
+    {
+      total=0;
+      for(i=1;i<400;i++)
+	if(i%3==0)
+	  for(j=1;j<400;j++)
+	    if(j%4==0)
+	      for(k=1;k<400;k++)
+		if(k%5==0)
+		  if(i+j+k==p)
+		    {
+		      if(k<i && k<j)
+			{
+			  a=k;
+			  if(i<j)
+			    {
+			      b=i;
+			      c=j;
+			    }
+			  else
+			    {
+			      b=j;
+			      c=i;
+			    }
+			}
+		      if(k<i && k>j)
+			{
+			  b=k;
+			  if(j<i)
+			    {
+			      a=j;
+			      c=i;
+			    }
+			  else
+			    {
+			      a=i;
+			      c=j;
+			    }
+			}
+		      if(k>i && k>j)
+			{
+			  c=k;
+			  if(i<j)
+			    {
+			      a=i;
+			      b=j;
+			    }
+			  else
+			    {
+			      a=j;
+			      b=i;
+			    }
+			}
+		      if(a*a+b*b==c*c)
+			total+=1;
+		    }
+      if(total>max)
+	{
+	  max=total;
+	  ans=p;
+	}
+    }
+  printf("%d\n",ans);
+}
