@@ -24,6 +24,19 @@
     (if (null? lst) val
         (loop (func val (car lst)) (cdr lst)))))
 
+(define (prime? n)
+  (define (prime-test f r)
+    (if (>= f r) #t
+        (if (= (modulo n f) 0) #f
+            (if (= (modulo n (+ f 2)) 0) #f
+                (prime-test (+ f 6) r)))))
+  (if (= n 1) #f
+      (if (< n 4) #t
+          (if (= (modulo n 2) 0) #f
+              (if (< n 9) #t
+                  (if (= (modulo n 3) 0) #f
+                      (or (prime-test 5 (round (sqrt n))) #f)))))))
+
 (define (sieve n)
   (define (aux u v)
     (let ((p (car v)))
